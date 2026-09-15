@@ -51,8 +51,10 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 # Export a path to GOROOT
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOROOT/bin
+if [[ $(command -v brew) ]]; then
+  export GOROOT=$(brew --prefix go)/libexec
+  export PATH=$PATH:$GOROOT/bin
+fi
 
 # Export a path to nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
