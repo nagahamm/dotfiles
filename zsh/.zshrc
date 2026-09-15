@@ -45,25 +45,8 @@ if [[ $(command -v exa) ]]; then
   alias l='clear && ls'
 fi
 
-# Setup GOPATH
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-# Export a path to GOROOT
-if [[ $(command -v brew) ]]; then
-  export GOROOT=$(brew --prefix go)/libexec
-  export PATH=$PATH:$GOROOT/bin
-fi
-
-# Export a path to nodebrew
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-
 # Export a path to pyenv
 eval "$(pyenv init -)"
-
-# Export a path to rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - zsh)"
 
 # Pass the starship
 eval "$(starship init zsh)"
