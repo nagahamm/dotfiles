@@ -42,7 +42,7 @@ Homebrewパッケージ(`mac/brew/.Brewfile`)は `bash mac/brew/install_brew.sh`
 
 | パス | 内容 |
 | --- | --- |
-| `git/` | `.gitconfig`(個人情報は含まず `~/.gitconfig.local` をinclude)・`.gitignore_global` |
+| `git/` | `.gitconfig`(個人情報は含まず `~/.gitconfig.local` をinclude。`core.excludesfile` で `.gitignore_global` を読み込む設定込み)・`.gitignore_global` |
 | `zsh/` | `.zshrc`・`.zprofile`・`.zshenv` |
 | `tmux/` | `.tmux.conf` |
 | `claude/` | Claude Codeのグローバル `CLAUDE.md`(`~/.claude/CLAUDE.md` にリンク) |
