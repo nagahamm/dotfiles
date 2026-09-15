@@ -1,6 +1,5 @@
-[user]
-    name = cygnu
-    email = crucia8@icloud.com
+[include]
+    path = ~/.gitconfig.local
 
 [alias]
     br = branch
