@@ -5,6 +5,11 @@ set -euo pipefail
 setup_smart_renamer() {
     local repo_dir="$HOME/Documents/smart-renamer"
 
+    if [ ! -t 0 ]; then
+        echo "非対話環境のため smart-renamer のセットアップをスキップしました。"
+        return
+    fi
+
     read -rp "smart-renamer をセットアップしますか? [y/N] " answer
     case "$answer" in
         [yY]*) ;;

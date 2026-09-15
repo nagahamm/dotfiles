@@ -22,8 +22,11 @@ log_fail() {
 ######################################################################
 # dotfilesをホームディレクトリに複製
 ######################################################################
+# 既にcloneされていれば、再度cloneしない(make updateで最新化する)
+if [ -d "$DOTPATH" ]; then
+    :
 # gitコマンドが存在すれば、gitを使う
-if is_exists "git"; then
+elif is_exists "git"; then
     # git clone [リポジトリ] [ディレクトリ(クローン先)]
     # git clone --recursiveは下記のコマンドと同義
     # git submodule init
