@@ -1,5 +1,6 @@
-# 除外リスト
-EXCLUSIONS := .DS_Store .git .gitmodules .gitignore
+# 除外リスト (IDE/ツールがリポジトリ直下に作るプロジェクトローカルな設定は
+# $HOME に配置するドットファイルではないため除外する)
+EXCLUSIONS := .DS_Store .git .gitmodules .gitignore .claude .idea
 # 対象リスト
 CANDIDATES := $(wildcard .??*) bin
 # 対象リストから除外リストを除外したリスト
