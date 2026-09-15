@@ -3,7 +3,7 @@
 # ではないため除外する)
 EXCLUSIONS := .DS_Store .git .gitmodules .gitignore .claude .idea .config
 # 対象リスト
-CANDIDATES := $(wildcard .??*) bin
+CANDIDATES := $(wildcard .??*)
 # 対象リストから除外リストを除外したリスト
 DOTFILES := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 # サブディレクトリ配下にあり、個別に $HOME へ配置するドットファイル
