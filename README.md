@@ -49,7 +49,7 @@ Homebrewパッケージ(`mac/brew/.Brewfile`)は `bash mac/brew/install_brew.sh`
 | `git/` | `.gitconfig`(個人情報は含まず `~/.gitconfig.local` をinclude。`core.excludesfile` で `.gitignore_global` を読み込む設定込み)・`.gitignore_global` |
 | `zsh/` | `.zshrc`・`.zprofile`・`.zshenv` |
 | `tmux/` | `.tmux.conf` |
-| `claude/` | Claude Codeのグローバル `CLAUDE.md`(`~/.claude/CLAUDE.md` にリンク) |
+| `claude/` | Claude Codeのグローバル `CLAUDE.md`・`settings.json`(それぞれ `~/.claude/CLAUDE.md`・`~/.claude/settings.json` にリンク) |
 | `.config/` | Neovim(`nvim/`)・starship(`starship.toml`) |
 | `mac/brew/` | Homebrewの `.Brewfile` とインストールスクリプト |
 | `mac/iterm2/` | iTerm2のカラープリセット(`make init` で自動インポート) |

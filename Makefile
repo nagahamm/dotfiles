@@ -1,6 +1,6 @@
 # $HOME へ配置するドットファイル
 # 形式: "リポジトリ内の相対パス:$HOME からの相対パス" ($HOME 配下の別ディレクトリに置く場合も対応)
-NESTED_DOTFILES := git/.gitconfig:.gitconfig git/.gitignore_global:.gitignore_global tmux/.tmux.conf:.tmux.conf zsh/.zprofile:.zprofile zsh/.zshenv:.zshenv zsh/.zshrc:.zshrc claude/CLAUDE.md:.claude/CLAUDE.md .config/nvim:.config/nvim .config/starship.toml:.config/starship.toml
+NESTED_DOTFILES := git/.gitconfig:.gitconfig git/.gitignore_global:.gitignore_global tmux/.tmux.conf:.tmux.conf zsh/.zprofile:.zprofile zsh/.zshenv:.zshenv zsh/.zshrc:.zshrc claude/CLAUDE.md:.claude/CLAUDE.md claude/settings.json:.claude/settings.json .config/nvim:.config/nvim .config/starship.toml:.config/starship.toml
 # ドットファイルディレクトリ
 DOTPATH := $(PWD)
 
