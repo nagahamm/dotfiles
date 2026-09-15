@@ -1,5 +1,5 @@
 ## Installation
 
 ```Shell
-bash -c "$(curl -L raw.githubusercontent.com/cygnu/dotfiles/master/etc/install)"
+bash -c "$(curl -L raw.githubusercontent.com/nagahamm/dotfiles/master/etc/install.sh)"
 ```
