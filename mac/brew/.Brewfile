@@ -1,5 +1,6 @@
 brew "bash"
 brew "eza"
+brew "gh"
 brew "neovim"
 brew "peco"
 brew "pyenv"

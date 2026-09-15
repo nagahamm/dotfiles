@@ -39,7 +39,10 @@ list: ## Show dot files in this repo
 init: ## Setup environment settings
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
 
-install: update deploy init ## Run make update, deploy, init
+tools: ## Setup personal tool repositories (smart-renamer, etc.)
+	@bash $(DOTPATH)/etc/tools.sh
+
+install: update deploy init tools ## Run make update, deploy, init, tools
 	@exec $$SHELL
 
 update: ## Fetch changes for this repo
