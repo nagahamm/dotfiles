@@ -17,6 +17,10 @@ HOME_DIR := $(DOTPATH:/.dotfiles=)
 ######################################################################
 .DEFAULT_GOAL := help
 
+# NESTED_DOTFILES の "リポジトリ内パス:配置先" を分解する
+nested_src = $(word 1, $(subst :, ,$(1)))
+nested_dest = $(word 2, $(subst :, ,$(1)))
+
 all:
 
 deploy: ## Create symlink to home directory
@@ -24,8 +28,8 @@ deploy: ## Create symlink to home directory
 	@echo ''
 	@$(foreach val, $(DOTFILES), ln -sfnv $(DOTPATH)/$(val) $(HOME)/$(val);)
 	@$(foreach pair, $(NESTED_DOTFILES), \
-		mkdir -p $(dir $(HOME)/$(word 2, $(subst :, ,$(pair)))); \
-		ln -sfnv $(DOTPATH)/$(word 1, $(subst :, ,$(pair))) $(HOME)/$(word 2, $(subst :, ,$(pair)));)
+		mkdir -p $(dir $(HOME)/$(call nested_dest,$(pair))); \
+		ln -sfnv $(DOTPATH)/$(call nested_src,$(pair)) $(HOME)/$(call nested_dest,$(pair));)
 
 list: ## Show dot files in this repo
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
@@ -45,7 +49,7 @@ update: ## Fetch changes for this repo
 clean: ## Remove the dot files and this repo
 	@echo 'Remove dot files in your home directory.'
 	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
-	@-$(foreach pair, $(NESTED_DOTFILES), rm -vf $(HOME)/$(word 2, $(subst :, ,$(pair)));)
+	@-$(foreach pair, $(NESTED_DOTFILES), rm -vf $(HOME)/$(call nested_dest,$(pair));)
 	-rm -rf $(DOTPATH)
 
 help: ## Self-documented Makefile
