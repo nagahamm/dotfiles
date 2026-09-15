@@ -1,9 +1,5 @@
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/core"
-
 brew "bash"
-brew "exa"
+brew "eza"
 brew "neovim"
 brew "peco"
 brew "pyenv"
