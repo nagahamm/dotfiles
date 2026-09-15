@@ -38,6 +38,10 @@ make install
 Homebrewパッケージ(`mac/brew/.Brewfile`)は `bash mac/brew/install_brew.sh`
 で別途インストールする。
 
+`eza --icons`(`ls`等のエイリアス)のアイコンを正しく表示するには、iTerm2の
+プロファイルフォントを `FiraCode Nerd Font` に変更する(iTerm2 > Preferences
+> Profiles > Text > Font)。
+
 ## ディレクトリ構成
 
 | パス | 内容 |
