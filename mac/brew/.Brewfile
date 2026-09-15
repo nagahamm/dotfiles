@@ -6,6 +6,7 @@ brew "bash"
 brew "exa"
 brew "neovim"
 brew "peco"
+brew "pyenv"
 brew "starship"
 brew "zsh"
 
