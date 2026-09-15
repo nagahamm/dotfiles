@@ -6,6 +6,7 @@ brew "pyenv"
 brew "starship"
 brew "zsh"
 
+cask "claude-code"
 cask "font-fira-code"
 cask "google-chrome"
 cask "iterm2"
