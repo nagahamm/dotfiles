@@ -1,0 +1,17 @@
+name: Brewfile Check
+
+on:
+  push:
+    paths:
+      - "mac/brew/.Brewfile"
+  schedule:
+    - cron: "0 0 * * 0" # 毎週日曜 00:00 UTC
+  workflow_dispatch:
+
+jobs:
+  brew-bundle-install:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: brew bundle install
+        run: brew bundle install --file=mac/brew/.Brewfile
