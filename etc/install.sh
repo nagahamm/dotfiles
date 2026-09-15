@@ -31,11 +31,11 @@ if is_exists "git"; then
     git clone -c core.symlinks=true --recursive "$DOTFILES_GITHUB" "$DOTPATH"
 # curl または wget が存在すれば、それを使う
 elif is_exists "curl" || is_exists "wget"; then
-    local tarball="https://github.com/cygnu/dotfiles/archive/master.tar.gz"
+    tarball="https://github.com/nagahamm/dotfiles/archive/master.tar.gz"
     if is_exists "curl"; then
         curl -L "$tarball"
     elif is_exists "wget"; then
-        wget -0 - "$tarball"
+        wget -O - "$tarball"
     fi | tar zxv
     # 解凍したら、DOTPATHに置く
     # mv [オプション] 移動元 移動先
@@ -47,31 +47,15 @@ else
 fi
 
 ######################################################################
-# /Users/[ユーザー名] 配下にシンボリックリンク(参照)を作成
+# セットアップ (シンボリックリンク作成・環境設定・ツール導入)
 ######################################################################
 # 移動
-command cd ~/.dotfiles
+command cd "$DOTPATH"
 # コマンド実行時の終了ステータスが正常(0)でなければエラー
 if [ $? -ne 0 ]; then
     log_fail "not found: $DOTPATH"
     exit 1
 fi
-# ドットファイルを列挙して、シンボリックリンクを作成
-for f in .??*
-do
-    # 一致したら、シンボリックリンクを作成せずに次の処理に移る
-    # 不要なドットファイルを対象から除外する
-    [ "$f" = ".git" ] && continue
-    [ "$f" = ".gitignore" ] && continue
-    [ "$f" = ".DS_Store" ] && continue
-
-    # ln [オプション] リンク元 リンク先
-    # e.g. ~/.dotfiles/.vimrcの参照を~/.vimrcに作成
-    # 更新する際は、~/.dorfilesを更新すれば、~/.vimrcにも反映される
-    # 基本的にはリンク元のファイルを更新・取得してメンテナンスする
-    ln -snfv "$DOTPATH/$f" "$HOME/$f"
-#       │││└─ 処理内容を表示
-#       ││└─ 強制的にシンボリックリンクを作成
-#       │└─ リンクの作成場所として指定したディレクトリがシンボリックリンクだった場合、参照先にリンクを作るのではなく、シンボリックリンクそのものを置き換える（-fと組み合わせて使用）
-#       └─ シンボリックリンクを作成
-done
+# Makefile の deploy/init/tools に委譲する(ここで独自にシンボリックリンクを
+# 組み立てると、Makefile側と二重管理になり片方だけ更新されてずれるため)
+make install

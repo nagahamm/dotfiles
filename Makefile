@@ -35,10 +35,7 @@ install: update deploy init tools ## Run make update, deploy, init, tools
 	@exec $$SHELL
 
 update: ## Fetch changes for this repo
-	git pull origin master
-	git submodule init
-	git submodule update
-	git submodule foreach git pull origin master
+	git pull origin main
 
 clean: ## Remove the dot files and this repo
 	@echo 'Remove dot files in your home directory.'
