@@ -4,8 +4,9 @@ EXCLUSIONS := .DS_Store .git .gitmodules .gitignore
 CANDIDATES := $(wildcard .??*) bin
 # 対象リストから除外リストを除外したリスト
 DOTFILES := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
-# サブディレクトリ配下にあり、個別に $HOME へ配置するドットファイル (リポジトリからの相対パス)
-NESTED_DOTFILES := git/.gitconfig git/.gitignore_global tmux/.tmux.conf zsh/.zprofile zsh/.zshenv zsh/.zshrc
+# サブディレクトリ配下にあり、個別に $HOME へ配置するドットファイル
+# 形式: "リポジトリ内の相対パス:$HOME からの相対パス" ($HOME 配下の別ディレクトリに置く場合も対応)
+NESTED_DOTFILES := git/.gitconfig:.gitconfig git/.gitignore_global:.gitignore_global tmux/.tmux.conf:.tmux.conf zsh/.zprofile:.zprofile zsh/.zshenv:.zshenv zsh/.zshrc:.zshrc claude/CLAUDE.md:.claude/CLAUDE.md
 # ドットファイルディレクトリ
 DOTPATH := $(PWD)
 # ホームディレクトリ := $(変数名:置換する文字列=置換後)
@@ -22,7 +23,9 @@ deploy: ## Create symlink to home directory
 	@echo '==> Start to deploy dotfiles to home directory.'
 	@echo ''
 	@$(foreach val, $(DOTFILES), ln -sfnv $(DOTPATH)/$(val) $(HOME)/$(val);)
-	@$(foreach val, $(NESTED_DOTFILES), ln -sfnv $(DOTPATH)/$(val) $(HOME)/$(notdir $(val));)
+	@$(foreach pair, $(NESTED_DOTFILES), \
+		mkdir -p $(dir $(HOME)/$(word 2, $(subst :, ,$(pair)))); \
+		ln -sfnv $(DOTPATH)/$(word 1, $(subst :, ,$(pair))) $(HOME)/$(word 2, $(subst :, ,$(pair)));)
 
 list: ## Show dot files in this repo
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
@@ -42,7 +45,7 @@ update: ## Fetch changes for this repo
 clean: ## Remove the dot files and this repo
 	@echo 'Remove dot files in your home directory.'
 	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
-	@-$(foreach val, $(NESTED_DOTFILES), rm -vrf $(HOME)/$(notdir $(val));)
+	@-$(foreach pair, $(NESTED_DOTFILES), rm -vf $(HOME)/$(word 2, $(subst :, ,$(pair)));)
 	-rm -rf $(DOTPATH)
 
 help: ## Self-documented Makefile
