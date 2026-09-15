@@ -4,7 +4,7 @@
 # 変数を環境変数として追加
 ######################################################################
 DOTPATH=~/.dotfiles; export DOTPATH
-DOTFILES_GITHUB="https://github.com/cygnu/dotfiles.git"; export DOTFILES_GITHUB
+DOTFILES_GITHUB="https://github.com/nagahamm/dotfiles.git"; export DOTFILES_GITHUB
 
 ######################################################################
 # 関数
