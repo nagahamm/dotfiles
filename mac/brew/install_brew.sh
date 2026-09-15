@@ -9,6 +9,6 @@ brew update
 echo "Ok. Run brew upgrade ..."
 brew upgrade
 
-brew bundle
+brew bundle --file="$(dirname "$0")/.Brewfile"
 
 brew cleanup
