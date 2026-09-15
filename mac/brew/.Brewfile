@@ -4,6 +4,7 @@ brew "neovim"
 brew "peco"
 brew "pyenv"
 brew "starship"
+brew "tmux"
 brew "zsh"
 
 cask "claude-code"
