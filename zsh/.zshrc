@@ -33,7 +33,6 @@ alias vim="nvim"
 # Alias that is valid only in the environment where the exa command is installed.
 if [[ $(command -v exa) ]]; then
   alias e='exa --icons --git'
-  alias l=e
   alias ls=e
   alias ea='exa -a --icons --git'
   alias la=ea
