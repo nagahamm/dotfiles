@@ -4,6 +4,8 @@ EXCLUSIONS := .DS_Store .git .gitmodules .gitignore
 CANDIDATES := $(wildcard .??*) bin
 # 対象リストから除外リストを除外したリスト
 DOTFILES := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
+# サブディレクトリ配下にあり、個別に $HOME へ配置するドットファイル (リポジトリからの相対パス)
+NESTED_DOTFILES := git/.gitconfig git/.gitignore_global tmux/.tmux.conf zsh/.zprofile zsh/.zshenv zsh/.zshrc
 # ドットファイルディレクトリ
 DOTPATH := $(PWD)
 # ホームディレクトリ := $(変数名:置換する文字列=置換後)
@@ -20,6 +22,7 @@ deploy: ## Create symlink to home directory
 	@echo '==> Start to deploy dotfiles to home directory.'
 	@echo ''
 	@$(foreach val, $(DOTFILES), ln -sfnv $(DOTPATH)/$(val) $(HOME)/$(val);)
+	@$(foreach val, $(NESTED_DOTFILES), ln -sfnv $(DOTPATH)/$(val) $(HOME)/$(notdir $(val));)
 
 list: ## Show dot files in this repo
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
@@ -39,6 +42,7 @@ update: ## Fetch changes for this repo
 clean: ## Remove the dot files and this repo
 	@echo 'Remove dot files in your home directory.'
 	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
+	@-$(foreach val, $(NESTED_DOTFILES), rm -vrf $(HOME)/$(notdir $(val));)
 	-rm -rf $(DOTPATH)
 
 help: ## Self-documented Makefile
